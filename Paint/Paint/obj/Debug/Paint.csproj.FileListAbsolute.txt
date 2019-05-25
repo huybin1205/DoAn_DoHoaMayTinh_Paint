@@ -1,0 +1,14 @@
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\bin\Debug\Paint.exe.config
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\bin\Debug\Paint.exe
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\bin\Debug\Paint.pdb
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.csprojAssemblyReference.cache
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.Form1.resources
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.Properties.Resources.resources
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.csproj.GenerateResource.cache
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.csproj.CoreCompileInputs.cache
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.exe
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.pdb
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\bin\Debug\DevComponents.DotNetBar2.dll
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\bin\Debug\DevComponents.DotNetBar2.xml
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.csproj.CopyComplete
+D:\DoAn_DoHoaMayTinh_Paint\Paint\Paint\obj\Debug\Paint.MiniPaint.resources
