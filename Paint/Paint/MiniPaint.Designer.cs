@@ -31,9 +31,30 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MiniPaint));
             this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanel2 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBar5 = new DevComponents.DotNetBar.RibbonBar();
+            this.btnText = new DevComponents.DotNetBar.ButtonItem();
+            this.btnZoomIn = new DevComponents.DotNetBar.ButtonItem();
+            this.btnZoomOut = new DevComponents.DotNetBar.ButtonItem();
+            this.btnSelect = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBar6 = new DevComponents.DotNetBar.RibbonBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnUndo = new DevComponents.DotNetBar.ButtonItem();
+            this.btnRedo = new DevComponents.DotNetBar.ButtonItem();
+            this.btnEraser = new DevComponents.DotNetBar.ButtonItem();
+            this.cbSize = new DevComponents.DotNetBar.ComboBoxItem();
             this.ribbonBar4 = new DevComponents.DotNetBar.RibbonBar();
+            this.btnLine = new DevComponents.DotNetBar.ButtonItem();
+            this.btnTriangle = new DevComponents.DotNetBar.ButtonItem();
+            this.btnSquare = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCircle = new DevComponents.DotNetBar.ButtonItem();
+            this.btnEclipse = new DevComponents.DotNetBar.ButtonItem();
+            this.btnRectangle = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFill = new DevComponents.DotNetBar.ButtonItem();
+            this.colorPickerDropDown1 = new DevComponents.DotNetBar.ColorPickerDropDown();
             this.ribbonBar3 = new DevComponents.DotNetBar.RibbonBar();
+            this.btnNew = new DevComponents.DotNetBar.ButtonItem();
+            this.btnOpen = new DevComponents.DotNetBar.ButtonItem();
+            this.btnSave = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBar2 = new DevComponents.DotNetBar.RibbonBar();
             this.ribbonBar1 = new DevComponents.DotNetBar.RibbonBar();
@@ -45,33 +66,18 @@
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPrint = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.metroStatusBar1 = new DevComponents.DotNetBar.Metro.MetroStatusBar();
             this.lblLocation = new DevComponents.DotNetBar.LabelItem();
             this.comboItem1 = new DevComponents.Editors.ComboItem();
             this.buttonItem15 = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBar5 = new DevComponents.DotNetBar.RibbonBar();
-            this.btnText = new DevComponents.DotNetBar.ButtonItem();
-            this.btnZoomIn = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem20 = new DevComponents.DotNetBar.ButtonItem();
-            this.btnSelect = new DevComponents.DotNetBar.ButtonItem();
-            this.btnUndo = new DevComponents.DotNetBar.ButtonItem();
-            this.btnRedo = new DevComponents.DotNetBar.ButtonItem();
-            this.btnEraser = new DevComponents.DotNetBar.ButtonItem();
-            this.cbSize = new DevComponents.DotNetBar.ComboBoxItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnLine = new DevComponents.DotNetBar.ButtonItem();
-            this.btnTriangle = new DevComponents.DotNetBar.ButtonItem();
-            this.btnSquare = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCircle = new DevComponents.DotNetBar.ButtonItem();
-            this.btnEclipse = new DevComponents.DotNetBar.ButtonItem();
-            this.btnRectangle = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFill = new DevComponents.DotNetBar.ButtonItem();
-            this.colorPickerDropDown1 = new DevComponents.DotNetBar.ColorPickerDropDown();
-            this.btnNew = new DevComponents.DotNetBar.ButtonItem();
-            this.btnOpen = new DevComponents.DotNetBar.ButtonItem();
-            this.btnSave = new DevComponents.DotNetBar.ButtonItem();
+            this.lvShape = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             this.ribbonBar6.SuspendLayout();
@@ -96,7 +102,7 @@
             this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.ribbonControl1.QuickToolbarItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.applicationButton1});
-            this.ribbonControl1.Size = new System.Drawing.Size(920, 136);
+            this.ribbonControl1.Size = new System.Drawing.Size(1083, 136);
             this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
             this.ribbonControl1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -128,7 +134,7 @@
             this.ribbonPanel2.Location = new System.Drawing.Point(0, 56);
             this.ribbonPanel2.Name = "ribbonPanel2";
             this.ribbonPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel2.Size = new System.Drawing.Size(920, 77);
+            this.ribbonPanel2.Size = new System.Drawing.Size(1083, 77);
             // 
             // 
             // 
@@ -142,6 +148,80 @@
             // 
             this.ribbonPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanel2.TabIndex = 2;
+            // 
+            // ribbonBar5
+            // 
+            this.ribbonBar5.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar5.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar5.ContainerControlProcessDialogKey = true;
+            this.ribbonBar5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBar5.DragDropSupport = true;
+            this.ribbonBar5.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnText,
+            this.btnZoomIn,
+            this.btnZoomOut,
+            this.btnSelect});
+            this.ribbonBar5.Location = new System.Drawing.Point(719, 0);
+            this.ribbonBar5.Name = "ribbonBar5";
+            this.ribbonBar5.Size = new System.Drawing.Size(198, 74);
+            this.ribbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBar5.TabIndex = 4;
+            this.ribbonBar5.Text = "Function";
+            // 
+            // 
+            // 
+            this.ribbonBar5.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar5.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // btnText
+            // 
+            this.btnText.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnText.Image = ((System.Drawing.Image)(resources.GetObject("btnText.Image")));
+            this.btnText.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnText.Name = "btnText";
+            this.btnText.SubItemsExpandWidth = 14;
+            this.btnText.Text = "Text";
+            this.btnText.Click += new System.EventHandler(this.btnText_Click);
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
+            this.btnZoomIn.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.SubItemsExpandWidth = 14;
+            this.btnZoomIn.Text = "Zoom(+)";
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+            this.btnZoomOut.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.SubItemsExpandWidth = 14;
+            this.btnZoomOut.Text = "Zoom(-)";
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
+            this.btnSelect.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.SubItemsExpandWidth = 14;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // ribbonBar6
             // 
@@ -177,6 +257,50 @@
             // 
             // 
             this.ribbonBar6.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(145, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.TabIndex = 10001;
+            this.label1.Text = "Size";
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnUndo.Image = ((System.Drawing.Image)(resources.GetObject("btnUndo.Image")));
+            this.btnUndo.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.SubItemsExpandWidth = 14;
+            this.btnUndo.Text = "Undo";
+            // 
+            // btnRedo
+            // 
+            this.btnRedo.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnRedo.Image = ((System.Drawing.Image)(resources.GetObject("btnRedo.Image")));
+            this.btnRedo.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.SubItemsExpandWidth = 14;
+            this.btnRedo.Text = "Redo";
+            // 
+            // btnEraser
+            // 
+            this.btnEraser.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnEraser.Image = ((System.Drawing.Image)(resources.GetObject("btnEraser.Image")));
+            this.btnEraser.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnEraser.Name = "btnEraser";
+            this.btnEraser.SubItemsExpandWidth = 14;
+            this.btnEraser.Text = "Eraser";
+            this.btnEraser.Click += new System.EventHandler(this.btnEraser_Click);
+            // 
+            // cbSize
+            // 
+            this.cbSize.DropDownHeight = 106;
+            this.cbSize.Name = "cbSize";
+            this.cbSize.SelectedIndexChanged += new System.EventHandler(this.cbSize_SelectedIndexChanged);
             // 
             // ribbonBar4
             // 
@@ -216,6 +340,79 @@
             // 
             this.ribbonBar4.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // btnLine
+            // 
+            this.btnLine.Icon = ((System.Drawing.Icon)(resources.GetObject("btnLine.Icon")));
+            this.btnLine.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnLine.Name = "btnLine";
+            this.btnLine.SubItemsExpandWidth = 14;
+            this.btnLine.Text = "Line";
+            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.Icon = ((System.Drawing.Icon)(resources.GetObject("btnTriangle.Icon")));
+            this.btnTriangle.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.SubItemsExpandWidth = 14;
+            this.btnTriangle.Text = "Triangle";
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
+            // 
+            // btnSquare
+            // 
+            this.btnSquare.Icon = ((System.Drawing.Icon)(resources.GetObject("btnSquare.Icon")));
+            this.btnSquare.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnSquare.Name = "btnSquare";
+            this.btnSquare.SubItemsExpandWidth = 14;
+            this.btnSquare.Text = "Square";
+            this.btnSquare.Click += new System.EventHandler(this.btnSquare_Click);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.Icon = ((System.Drawing.Icon)(resources.GetObject("btnCircle.Icon")));
+            this.btnCircle.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.SubItemsExpandWidth = 14;
+            this.btnCircle.Text = "Circle";
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // btnEclipse
+            // 
+            this.btnEclipse.Icon = ((System.Drawing.Icon)(resources.GetObject("btnEclipse.Icon")));
+            this.btnEclipse.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnEclipse.Name = "btnEclipse";
+            this.btnEclipse.SubItemsExpandWidth = 14;
+            this.btnEclipse.Text = "Ellipse";
+            this.btnEclipse.Click += new System.EventHandler(this.btnEclipse_Click);
+            // 
+            // btnRectangle
+            // 
+            this.btnRectangle.Icon = ((System.Drawing.Icon)(resources.GetObject("btnRectangle.Icon")));
+            this.btnRectangle.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnRectangle.Name = "btnRectangle";
+            this.btnRectangle.SubItemsExpandWidth = 14;
+            this.btnRectangle.Text = "Rectangle";
+            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
+            // 
+            // btnFill
+            // 
+            this.btnFill.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnFill.Image = ((System.Drawing.Image)(resources.GetObject("btnFill.Image")));
+            this.btnFill.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnFill.Name = "btnFill";
+            this.btnFill.SubItemsExpandWidth = 14;
+            this.btnFill.Text = "Fill";
+            this.btnFill.Click += new System.EventHandler(this.btnFill_Click);
+            // 
+            // colorPickerDropDown1
+            // 
+            this.colorPickerDropDown1.Image = ((System.Drawing.Image)(resources.GetObject("colorPickerDropDown1.Image")));
+            this.colorPickerDropDown1.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.colorPickerDropDown1.Name = "colorPickerDropDown1";
+            this.colorPickerDropDown1.SubItemsExpandWidth = 14;
+            this.colorPickerDropDown1.Text = "Color";
+            this.colorPickerDropDown1.SelectedColorChanged += new System.EventHandler(this.colorPickerDropDown1_SelectedColorChanged);
+            // 
             // ribbonBar3
             // 
             this.ribbonBar3.AutoOverflowEnabled = true;
@@ -249,6 +446,36 @@
             // 
             this.ribbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // btnNew
+            // 
+            this.btnNew.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
+            this.btnNew.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.SubItemsExpandWidth = 14;
+            this.btnNew.Text = "New";
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
+            this.btnOpen.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.SubItemsExpandWidth = 14;
+            this.btnOpen.Text = "Open";
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.SubItemsExpandWidth = 14;
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // ribbonPanel1
             // 
             this.ribbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -258,7 +485,7 @@
             this.ribbonPanel1.Location = new System.Drawing.Point(0, 0);
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel1.Size = new System.Drawing.Size(920, 133);
+            this.ribbonPanel1.Size = new System.Drawing.Size(1083, 133);
             // 
             // 
             // 
@@ -404,7 +631,7 @@
             this.buttonItem2,
             this.buttonItem3,
             this.buttonItem4,
-            this.buttonItem6,
+            this.btnPrint,
             this.buttonItem7});
             // 
             // 
@@ -422,6 +649,7 @@
             this.buttonItem2.Name = "buttonItem2";
             this.buttonItem2.SubItemsExpandWidth = 24;
             this.buttonItem2.Text = "&New";
+            this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
             // 
             // buttonItem3
             // 
@@ -439,13 +667,14 @@
             this.buttonItem4.SubItemsExpandWidth = 24;
             this.buttonItem4.Text = "&Save...";
             // 
-            // buttonItem6
+            // btnPrint
             // 
-            this.buttonItem6.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem6.Image = ((System.Drawing.Image)(resources.GetObject("buttonItem6.Image")));
-            this.buttonItem6.Name = "buttonItem6";
-            this.buttonItem6.SubItemsExpandWidth = 24;
-            this.buttonItem6.Text = "&Print...";
+            this.btnPrint.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.SubItemsExpandWidth = 24;
+            this.btnPrint.Text = "&Print...";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // buttonItem7
             // 
@@ -470,7 +699,7 @@
             this.lblLocation});
             this.metroStatusBar1.Location = new System.Drawing.Point(0, 536);
             this.metroStatusBar1.Name = "metroStatusBar1";
-            this.metroStatusBar1.Size = new System.Drawing.Size(920, 22);
+            this.metroStatusBar1.Size = new System.Drawing.Size(1083, 22);
             this.metroStatusBar1.TabIndex = 1;
             // 
             // lblLocation
@@ -491,220 +720,69 @@
             this.buttonItem15.SubItemsExpandWidth = 14;
             this.buttonItem15.Text = "Line";
             // 
-            // ribbonBar5
-            // 
-            this.ribbonBar5.AutoOverflowEnabled = true;
+            // lvShape
             // 
             // 
             // 
-            this.ribbonBar5.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            this.lvShape.Border.Class = "ListViewBorder";
+            this.lvShape.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lvShape.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.lvShape.DisabledBackColor = System.Drawing.Color.Empty;
+            this.lvShape.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lvShape.FullRowSelect = true;
+            this.lvShape.GridLines = true;
+            this.lvShape.HideSelection = false;
+            this.lvShape.Location = new System.Drawing.Point(833, 136);
+            this.lvShape.Name = "lvShape";
+            this.lvShape.Size = new System.Drawing.Size(250, 400);
+            this.lvShape.TabIndex = 2;
+            this.lvShape.UseCompatibleStateImageBehavior = false;
+            this.lvShape.View = System.Windows.Forms.View.Details;
+            this.lvShape.SelectedIndexChanged += new System.EventHandler(this.lvShape_SelectedIndexChanged);
             // 
+            // columnHeader1
             // 
-            this.ribbonBar5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonBar5.ContainerControlProcessDialogKey = true;
-            this.ribbonBar5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBar5.DragDropSupport = true;
-            this.ribbonBar5.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnText,
-            this.btnZoomIn,
-            this.buttonItem20,
-            this.btnSelect});
-            this.ribbonBar5.Location = new System.Drawing.Point(719, 0);
-            this.ribbonBar5.Name = "ribbonBar5";
-            this.ribbonBar5.Size = new System.Drawing.Size(198, 74);
-            this.ribbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBar5.TabIndex = 4;
-            this.ribbonBar5.Text = "Function";
+            this.columnHeader1.Text = "Shape";
+            this.columnHeader1.Width = 93;
             // 
+            // columnHeader2
             // 
+            this.columnHeader2.Text = "X.X";
+            this.columnHeader2.Width = 48;
             // 
-            this.ribbonBar5.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // columnHeader3
             // 
+            this.columnHeader3.Text = "X.Y";
+            this.columnHeader3.Width = 41;
             // 
+            // columnHeader4
             // 
-            this.ribbonBar5.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.columnHeader4.Text = "Y.X";
+            this.columnHeader4.Width = 39;
             // 
-            // btnText
+            // columnHeader5
             // 
-            this.btnText.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnText.Image = ((System.Drawing.Image)(resources.GetObject("btnText.Image")));
-            this.btnText.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnText.Name = "btnText";
-            this.btnText.SubItemsExpandWidth = 14;
-            this.btnText.Text = "Text";
-            // 
-            // btnZoomIn
-            // 
-            this.btnZoomIn.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
-            this.btnZoomIn.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.SubItemsExpandWidth = 14;
-            this.btnZoomIn.Text = "Zoom(+)";
-            // 
-            // buttonItem20
-            // 
-            this.buttonItem20.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem20.Image = ((System.Drawing.Image)(resources.GetObject("buttonItem20.Image")));
-            this.buttonItem20.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.buttonItem20.Name = "buttonItem20";
-            this.buttonItem20.SubItemsExpandWidth = 14;
-            this.buttonItem20.Text = "Zoom(-)";
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
-            this.btnSelect.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.SubItemsExpandWidth = 14;
-            this.btnSelect.Text = "Select";
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnUndo.Image = ((System.Drawing.Image)(resources.GetObject("btnUndo.Image")));
-            this.btnUndo.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.SubItemsExpandWidth = 14;
-            this.btnUndo.Text = "Undo";
-            // 
-            // btnRedo
-            // 
-            this.btnRedo.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnRedo.Image = ((System.Drawing.Image)(resources.GetObject("btnRedo.Image")));
-            this.btnRedo.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnRedo.Name = "btnRedo";
-            this.btnRedo.SubItemsExpandWidth = 14;
-            this.btnRedo.Text = "Redo";
-            // 
-            // btnEraser
-            // 
-            this.btnEraser.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnEraser.Image = ((System.Drawing.Image)(resources.GetObject("btnEraser.Image")));
-            this.btnEraser.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnEraser.Name = "btnEraser";
-            this.btnEraser.SubItemsExpandWidth = 14;
-            this.btnEraser.Text = "Eraser";
-            // 
-            // cbSize
-            // 
-            this.cbSize.DropDownHeight = 106;
-            this.cbSize.Name = "cbSize";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(145, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 10001;
-            this.label1.Text = "Size";
-            // 
-            // btnLine
-            // 
-            this.btnLine.Icon = ((System.Drawing.Icon)(resources.GetObject("btnLine.Icon")));
-            this.btnLine.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnLine.Name = "btnLine";
-            this.btnLine.SubItemsExpandWidth = 14;
-            this.btnLine.Text = "Line";
-            // 
-            // btnTriangle
-            // 
-            this.btnTriangle.Icon = ((System.Drawing.Icon)(resources.GetObject("btnTriangle.Icon")));
-            this.btnTriangle.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnTriangle.Name = "btnTriangle";
-            this.btnTriangle.SubItemsExpandWidth = 14;
-            this.btnTriangle.Text = "Triangle";
-            // 
-            // btnSquare
-            // 
-            this.btnSquare.Icon = ((System.Drawing.Icon)(resources.GetObject("btnSquare.Icon")));
-            this.btnSquare.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnSquare.Name = "btnSquare";
-            this.btnSquare.SubItemsExpandWidth = 14;
-            this.btnSquare.Text = "Square";
-            // 
-            // btnCircle
-            // 
-            this.btnCircle.Icon = ((System.Drawing.Icon)(resources.GetObject("btnCircle.Icon")));
-            this.btnCircle.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnCircle.Name = "btnCircle";
-            this.btnCircle.SubItemsExpandWidth = 14;
-            this.btnCircle.Text = "Circle";
-            // 
-            // btnEclipse
-            // 
-            this.btnEclipse.Icon = ((System.Drawing.Icon)(resources.GetObject("btnEclipse.Icon")));
-            this.btnEclipse.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnEclipse.Name = "btnEclipse";
-            this.btnEclipse.SubItemsExpandWidth = 14;
-            this.btnEclipse.Text = "Eclipse";
-            // 
-            // btnRectangle
-            // 
-            this.btnRectangle.Icon = ((System.Drawing.Icon)(resources.GetObject("btnRectangle.Icon")));
-            this.btnRectangle.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.SubItemsExpandWidth = 14;
-            this.btnRectangle.Text = "Rectangle";
-            // 
-            // btnFill
-            // 
-            this.btnFill.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnFill.Image = ((System.Drawing.Image)(resources.GetObject("btnFill.Image")));
-            this.btnFill.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnFill.Name = "btnFill";
-            this.btnFill.SubItemsExpandWidth = 14;
-            this.btnFill.Text = "Fill";
-            // 
-            // colorPickerDropDown1
-            // 
-            this.colorPickerDropDown1.Image = ((System.Drawing.Image)(resources.GetObject("colorPickerDropDown1.Image")));
-            this.colorPickerDropDown1.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.colorPickerDropDown1.Name = "colorPickerDropDown1";
-            this.colorPickerDropDown1.SubItemsExpandWidth = 14;
-            this.colorPickerDropDown1.Text = "Color";
-            // 
-            // btnNew
-            // 
-            this.btnNew.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.SubItemsExpandWidth = 14;
-            this.btnNew.Text = "New";
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
-            this.btnOpen.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.SubItemsExpandWidth = 14;
-            this.btnOpen.Text = "Open";
-            // 
-            // btnSave
-            // 
-            this.btnSave.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.SubItemsExpandWidth = 14;
-            this.btnSave.Text = "Save";
+            this.columnHeader5.Text = "Y.Y";
             // 
             // MiniPaint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 558);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(1083, 558);
+            this.Controls.Add(this.lvShape);
             this.Controls.Add(this.metroStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MiniPaint";
             this.Text = "Mini Paint";
+            this.Load += new System.EventHandler(this.MiniPaint_Load);
             this.ribbonControl1.ResumeLayout(false);
             this.ribbonControl1.PerformLayout();
             this.ribbonPanel2.ResumeLayout(false);
@@ -725,7 +803,7 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem2;
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
-        private DevComponents.DotNetBar.ButtonItem buttonItem6;
+        private DevComponents.DotNetBar.ButtonItem btnPrint;
         private DevComponents.DotNetBar.ButtonItem buttonItem7;
         private DevComponents.DotNetBar.Metro.MetroStatusBar metroStatusBar1;
         private DevComponents.DotNetBar.LabelItem lblLocation;
@@ -742,7 +820,7 @@
         private DevComponents.DotNetBar.RibbonBar ribbonBar5;
         private DevComponents.DotNetBar.ButtonItem btnText;
         private DevComponents.DotNetBar.ButtonItem btnZoomIn;
-        private DevComponents.DotNetBar.ButtonItem buttonItem20;
+        private DevComponents.DotNetBar.ButtonItem btnZoomOut;
         private DevComponents.DotNetBar.ButtonItem btnSelect;
         private System.Windows.Forms.Label label1;
         private DevComponents.DotNetBar.ButtonItem btnUndo;
@@ -760,5 +838,11 @@
         private DevComponents.DotNetBar.ButtonItem btnNew;
         private DevComponents.DotNetBar.ButtonItem btnOpen;
         private DevComponents.DotNetBar.ButtonItem btnSave;
+        private DevComponents.DotNetBar.Controls.ListViewEx lvShape;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
