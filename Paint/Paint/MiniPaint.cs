@@ -121,6 +121,12 @@ namespace Paint
                         pen = new Pen(_currColor, (float)_currPenSize);
                         e.Graphics.DrawEllipse(pen, _p1.X, _p1.Y, dx, dy);
                         break;
+                    case ShapeMode.FILLTRIANGLE:
+                        sb = new SolidBrush(_currColor);
+                        Point pT = new Point(_p1.X, _p2.Y);
+                        Point[] points = { _p1, _p2, pT };
+                        e.Graphics.FillPolygon(sb,points);
+                        break;
                     case ShapeMode.FILLSQUARE:
                         sb = new SolidBrush(_currColor);
                         e.Graphics.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dx));
@@ -160,7 +166,7 @@ namespace Paint
 
         private void XuLyUndoRedo()
         {
-            if (_currShapeMode != ShapeMode.ERASER)
+            if (_currShapeMode != ShapeMode.ERASER || _currShapeMode != ShapeMode.SELECT)
             {
                 dsBitmap.Add((Bitmap)_bm.Clone());
                 vt = dsBitmap.Count - 1;
@@ -208,6 +214,12 @@ namespace Paint
                 case ShapeMode.DRAWELLIPSE:
                     pen = new Pen(_currColor, (float)_currPenSize);
                     _grs.DrawEllipse(pen, _p1.X, _p1.Y, dx, dy);
+                    break;
+                case ShapeMode.FILLTRIANGLE:
+                    sb = new SolidBrush(_currColor);
+                    Point pT = new Point(_p1.X, _p2.Y);
+                    Point[] points = { _p1, _p2, pT };
+                    _grs.FillPolygon(sb, points);
                     break;
                 case ShapeMode.FILLSQUARE:
                     sb = new SolidBrush(_currColor);
@@ -272,7 +284,10 @@ namespace Paint
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
-            _currShapeMode = ShapeMode.DRAWTRIANGLE;
+            if (btnFill.Checked)
+                _currShapeMode = ShapeMode.FILLTRIANGLE;
+            else
+                _currShapeMode = ShapeMode.DRAWTRIANGLE;
         }
 
         private void btnText_Click(object sender, EventArgs e)
@@ -348,7 +363,12 @@ namespace Paint
 
         private void buttonItem2_Click(object sender, EventArgs e)
         {
-
+            dsBitmap.Clear();
+            lvShape.Items.Clear();
+            _bm = new Bitmap(this.Width, this.Height);
+            _grs = Graphics.FromImage(_bm);
+            this.Refresh();
+            this.BackgroundImage = (Bitmap)_bm.Clone();
         }
 
         private void buttonItem20_Click(object sender, EventArgs e)
@@ -476,11 +496,25 @@ namespace Paint
                 case "DRAWRECTANGLE":
                     _gr.DrawRectangle(pen, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dy));
                     break;
+                case "FILLTRIANGLE":
+                    Point pT = new Point(_p1.X, _p2.Y);
+                    Point[] points = { _p1, _p2, pT };
+                    _grs.FillPolygon(sb, points);
+                    break;
+                case "FILLSQUARE":
+                    _grs.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dx));
+                    break;
+                case "FILLCIRCLE":
+                    _grs.FillEllipse(sb, _p1.X, _p1.Y, dx, dx);
+                    break;
                 case "FILLRECTANGLE":
                     _gr.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dy));
                     break;
                 case "FILLELLIPSE":
                     _gr.FillEllipse(sb, _p1.X, _p1.Y, dx, dy);
+                    break;
+                case "TEXT":
+                    _grs.DrawString(text, _font, sb, _p1.X, _p1.Y);
                     break;
                 default:
                     MessageBox.Show("Lỗi");
@@ -497,6 +531,68 @@ namespace Paint
         private void btnEraser_Click(object sender, EventArgs e)
         {
             _currShapeMode = ShapeMode.ERASER;
+        }
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            vt--;
+            if (vt < 0)
+            {
+                vt = 0;
+            }
+            this.BackgroundImage = (Bitmap)dsBitmap[vt].Clone();
+        }
+
+        private void btnRedo_Click(object sender, EventArgs e)
+        {
+            vt++;
+            if (vt > dsBitmap.Count - 1)
+                vt = dsBitmap.Count - 1;
+            this.BackgroundImage = (Bitmap)dsBitmap[vt].Clone();
+        }
+
+        private void buttonItem3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            //Cài đặt bộ lọc đuôi ảnh
+            ofd.Filter = "Image files (*.jpg,*.jpeg,*.png,*.bmp,*.tiff)|*jpg;*jpeg;*.png;*.bmp;*.tiff";
+            //Cài đặt bộ chọn nhiều
+            ofd.Multiselect = false;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                //Lấy ảnh bằng đường dẫn
+                Image img = Image.FromFile(ofd.FileName);
+                filename = ofd.FileName;
+                //Tạo mới lại Bitmap bằng cỡ ảnh vừa lấy
+                _bm = new Bitmap(img.Width, img.Height);
+                //Tạo lại đối tượng Graphics cho Bitmap
+                _grs = Graphics.FromImage(_bm);
+                //Tạo đối tượng HCN bằng với  Bitmap
+                Rectangle rec = new Rectangle(0, 0, _bm.Width, _bm.Height);
+                //Vẽ ảnh lên Bitmap có cỡ bằng với HCN vừa tạo
+                _grs.DrawImage(img, rec);
+                this.Refresh();
+                this.BackgroundImage = (Bitmap)_bm.Clone();
+            }
+        }
+
+        private void buttonItem4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            //Cài đặt bộ lọc đuôi ảnh
+            sfd.Filter = "Bmp (*.bmp)|*.bmp|Jpeg (*.jpeg)|*.jpeg|Jpg (*.jpg)|*.jpg|Png (*.png)|*.png";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                _bm.Save(sfd.FileName);
+            }
+        }
+
+        private void buttonItem7_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

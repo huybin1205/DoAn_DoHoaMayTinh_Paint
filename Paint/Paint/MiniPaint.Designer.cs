@@ -276,6 +276,7 @@
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.SubItemsExpandWidth = 14;
             this.btnUndo.Text = "Undo";
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
             // 
             // btnRedo
             // 
@@ -285,6 +286,7 @@
             this.btnRedo.Name = "btnRedo";
             this.btnRedo.SubItemsExpandWidth = 14;
             this.btnRedo.Text = "Redo";
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
             // 
             // btnEraser
             // 
@@ -658,6 +660,7 @@
             this.buttonItem3.Name = "buttonItem3";
             this.buttonItem3.SubItemsExpandWidth = 24;
             this.buttonItem3.Text = "&Open...";
+            this.buttonItem3.Click += new System.EventHandler(this.buttonItem3_Click);
             // 
             // buttonItem4
             // 
@@ -666,6 +669,7 @@
             this.buttonItem4.Name = "buttonItem4";
             this.buttonItem4.SubItemsExpandWidth = 24;
             this.buttonItem4.Text = "&Save...";
+            this.buttonItem4.Click += new System.EventHandler(this.buttonItem4_Click);
             // 
             // btnPrint
             // 
@@ -684,6 +688,7 @@
             this.buttonItem7.Name = "buttonItem7";
             this.buttonItem7.SubItemsExpandWidth = 24;
             this.buttonItem7.Text = "&Close";
+            this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
             // 
             // metroStatusBar1
             // 
