@@ -534,7 +534,7 @@ namespace Paint
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
-        {
+        { 
             vt--;
             if (vt < 0)
             {
