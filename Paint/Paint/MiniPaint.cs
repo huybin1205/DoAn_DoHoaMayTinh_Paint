@@ -38,20 +38,17 @@ namespace Paint
         private Color _currColor;
         private int _currPenSize;
         private ShapeMode _currShapeMode;
-        private List<Bitmap> dsBitmap;
-        private int vt;
-        private bool _isSelected;
         private Font _font;
         public static string text = "";
         private string filename = "";
 
+        //Undo and Redo
+        private List<Bitmap> dsBitmap;
+        private int _currPosition;
+
         public MiniPaint()
         {
             InitializeComponent();
-        }
-
-        private void MiniPaint_Load(object sender, EventArgs e)
-        {
             this.MouseDown += MiniPaint_MouseDown;
             this.MouseMove += MiniPaint_MouseMove;
             this.MouseUp += MiniPaint_MouseUp;
@@ -69,10 +66,16 @@ namespace Paint
 
             //Thêm vào item cho comboBox
             InitComboBoxSize();
-
-            dsBitmap = new List<Bitmap>();
-            vt = 0;
             _font = new Font("Arial", 13);
+
+            //Khởi tạo danh sách Bitmap
+            dsBitmap = new List<Bitmap>();
+            _currPosition = -1;
+        }
+
+        private void MiniPaint_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void InitComboBoxSize()
@@ -83,9 +86,15 @@ namespace Paint
             }
             cbSize.SelectedIndex = 0;
         }
-
+        
         private void MiniPaint_Paint(object sender, PaintEventArgs e)
         {
+            XuLyPaint(e);
+        }
+
+        private void XuLyPaint(PaintEventArgs e)
+        {
+            //Xử lý vẽ
             if (_isDown)
             {
                 Pen pen;
@@ -125,7 +134,7 @@ namespace Paint
                         sb = new SolidBrush(_currColor);
                         Point pT = new Point(_p1.X, _p2.Y);
                         Point[] points = { _p1, _p2, pT };
-                        e.Graphics.FillPolygon(sb,points);
+                        e.Graphics.FillPolygon(sb, points);
                         break;
                     case ShapeMode.FILLSQUARE:
                         sb = new SolidBrush(_currColor);
@@ -166,91 +175,15 @@ namespace Paint
 
         private void XuLyUndoRedo()
         {
-            if (_currShapeMode != ShapeMode.ERASER || _currShapeMode != ShapeMode.SELECT)
-            {
-                dsBitmap.Add((Bitmap)_bm.Clone());
-                vt = dsBitmap.Count - 1;
-                ListViewItem lvi = new ListViewItem(_currShapeMode.ToString());
-                lvi.SubItems.Add(_p1.X + "");
-                lvi.SubItems.Add(_p1.Y + "");
-                lvi.SubItems.Add(_p2.X + "");
-                lvi.SubItems.Add(_p2.Y + "");
-                lvShape.Items.Add(lvi);
-            }
+            //Hiển thị lên Listview
+            ListViewItem lvi = new ListViewItem(_currShapeMode.ToString());
+            lvi.SubItems.Add(_p1.X.ToString());
+            lvi.SubItems.Add(_p1.Y.ToString());
+            lvi.SubItems.Add(_p2.X.ToString());
+            lvi.SubItems.Add(_p2.Y.ToString());
+            lvShape.Items.Add(lvi);
         }
 
-        private void XuLyVe()
-        {
-            _isDown = false;
-            Pen pen;
-            SolidBrush sb;
-            int dx = _p2.X - _p1.X;
-            int dy = _p2.Y - _p1.Y;
-            switch (_currShapeMode)
-            {
-                case ShapeMode.LINE:
-                    pen = new Pen(_currColor, (float)_currPenSize);
-                    _grs.DrawLine(pen, _p1, _p2);
-                    break;
-                case ShapeMode.DRAWTRIANGLE:
-                    pen = new Pen(_currColor, (float)_currPenSize);
-                    _grs.DrawLine(pen, _p1, _p2);
-                    Point pTemp = new Point(_p1.X, _p2.Y);
-                    _grs.DrawLine(pen, _p1, pTemp);
-                    _grs.DrawLine(pen, _p2, pTemp);
-                    break;
-                case ShapeMode.DRAWRECTANGLE:
-                    pen = new Pen(_currColor, (float)_currPenSize);
-                    _grs.DrawRectangle(pen, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dy));
-                    break;
-                case ShapeMode.DRAWSQUARE:
-                    pen = new Pen(_currColor, (float)_currPenSize);
-                    _grs.DrawRectangle(pen, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dx));
-                    break;
-                case ShapeMode.DRAWCIRCLE:
-                    pen = new Pen(_currColor, (float)_currPenSize);
-                    _grs.DrawEllipse(pen, _p1.X, _p1.Y, dx, dx);
-                    break;
-                case ShapeMode.DRAWELLIPSE:
-                    pen = new Pen(_currColor, (float)_currPenSize);
-                    _grs.DrawEllipse(pen, _p1.X, _p1.Y, dx, dy);
-                    break;
-                case ShapeMode.FILLTRIANGLE:
-                    sb = new SolidBrush(_currColor);
-                    Point pT = new Point(_p1.X, _p2.Y);
-                    Point[] points = { _p1, _p2, pT };
-                    _grs.FillPolygon(sb, points);
-                    break;
-                case ShapeMode.FILLSQUARE:
-                    sb = new SolidBrush(_currColor);
-                    _grs.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dx));
-                    break;
-                case ShapeMode.FILLCIRCLE:
-                    sb = new SolidBrush(_currColor);
-                    _grs.FillEllipse(sb, _p1.X, _p1.Y, dx, dx);
-                    break;
-                case ShapeMode.FILLELLIPSE:
-                    sb = new SolidBrush(_currColor);
-                    _grs.FillEllipse(sb, _p1.X, _p1.Y, dx, dy);
-                    break;
-                case ShapeMode.FILLRECTANGLE:
-                    sb = new SolidBrush(_currColor);
-                    _grs.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dy));
-                    break;
-                case ShapeMode.TEXT:
-                    sb = new SolidBrush(_currColor);
-                    _grs.DrawString(text, _font, sb, _p1.X, _p1.Y);
-                    break;
-                case ShapeMode.ERASER:
-                    pen = new Pen(this.BackColor, (float) _currPenSize);
-                    _grs.DrawLine(pen, _p1, _p2);
-                    break;
-                default:
-                    MessageBox.Show("Lỗi");
-                    break;
-            }
-            this.BackgroundImage = (Bitmap)_bm.Clone();
-        }
 
         private void MiniPaint_MouseMove(object sender, MouseEventArgs e)
         {
@@ -260,21 +193,6 @@ namespace Paint
                 this.Refresh();
             }
             lblLocation.Text = e.X.ToString() + "," + e.Y.ToString();
-        }
-
-        private void MiniPaint_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (vt < dsBitmap.Count - 1)
-            {
-                for (int i = vt; i < dsBitmap.Count - 1; i++)
-                {
-                    dsBitmap.RemoveAt(i);
-                }
-                _grs = Graphics.FromImage(dsBitmap[vt]);
-                this.BackgroundImage = (Bitmap)dsBitmap[vt].Clone();
-            }
-            _isDown = true;
-            _p1 = new Point(e.Location.X, e.Location.Y);
         }
 
         private void btnLine_Click(object sender, EventArgs e)
@@ -314,7 +232,6 @@ namespace Paint
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            dsBitmap.Clear();
             lvShape.Items.Clear();
             _bm = new Bitmap(this.Width, this.Height);
             _grs = Graphics.FromImage(_bm);
@@ -363,7 +280,6 @@ namespace Paint
 
         private void buttonItem2_Click(object sender, EventArgs e)
         {
-            dsBitmap.Clear();
             lvShape.Items.Clear();
             _bm = new Bitmap(this.Width, this.Height);
             _grs = Graphics.FromImage(_bm);
@@ -433,37 +349,24 @@ namespace Paint
 
         }
 
-        private int selected = 0;
+        private int selected = -1;
         private void lvShape_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lvShape.SelectedItems.Count > 0)
             {
                 Pen pen;
                 SolidBrush sb;
-                Graphics gr = this.CreateGraphics();
-                if (selected != lvShape.Items.IndexOf(lvShape.SelectedItems[0]))
-                {
-                    this.Refresh();
-                    pen = new Pen(_currColor, _currPenSize);
-                    sb = new SolidBrush(_currColor);
-                    for (int i = 0; i < lvShape.Items.Count - 1; i++)
-                    {
-                        if (selected == lvShape.Items[i].Index)
-                        {
-                            XuLySelect(pen, sb, gr, lvShape.Items[i].Text);
-                        }
-                    }
-                }
+
+                selected = lvShape.Items.IndexOf(lvShape.SelectedItems[0]);
                 int x1 = int.Parse(lvShape.SelectedItems[0].SubItems[1].Text);
                 int y1 = int.Parse(lvShape.SelectedItems[0].SubItems[2].Text);
                 int x2 = int.Parse(lvShape.SelectedItems[0].SubItems[3].Text);
                 int y2 = int.Parse(lvShape.SelectedItems[0].SubItems[4].Text);
                 _p1 = new Point(x1, y1);
                 _p2 = new Point(x2, y2);
-                selected = lvShape.Items.IndexOf(lvShape.SelectedItems[0]);
-                pen = new Pen(Color.Red, 2f);
-                sb = new SolidBrush(Color.Red);
-                XuLySelect(pen, sb, gr, lvShape.SelectedItems[0].Text);
+                pen = new Pen(_currColor, 2f);
+                sb = new SolidBrush(_currColor);
+                XuLySelect(pen, sb, _grs, lvShape.SelectedItems[0].Text);
             }
 
             
@@ -520,6 +423,7 @@ namespace Paint
                     MessageBox.Show("Lỗi");
                     break;
             }
+            this.BackgroundImage = (Bitmap)_bm.Clone();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -533,22 +437,120 @@ namespace Paint
             _currShapeMode = ShapeMode.ERASER;
         }
 
-        private void btnUndo_Click(object sender, EventArgs e)
-        { 
-            vt--;
-            if (vt < 0)
+        private void XuLyVe()
+        {
+            _isDown = false;
+            Pen pen;
+            SolidBrush sb;
+            int dx = _p2.X - _p1.X;
+            int dy = _p2.Y - _p1.Y;
+            switch (_currShapeMode)
             {
-                vt = 0;
+                case ShapeMode.LINE:
+                    pen = new Pen(_currColor, (float)_currPenSize);
+                    _grs.DrawLine(pen, _p1, _p2);
+                    break;
+                case ShapeMode.DRAWTRIANGLE:
+                    pen = new Pen(_currColor, (float)_currPenSize);
+                    _grs.DrawLine(pen, _p1, _p2);
+                    Point pTemp = new Point(_p1.X, _p2.Y);
+                    _grs.DrawLine(pen, _p1, pTemp);
+                    _grs.DrawLine(pen, _p2, pTemp);
+                    break;
+                case ShapeMode.DRAWRECTANGLE:
+                    pen = new Pen(_currColor, (float)_currPenSize);
+                    _grs.DrawRectangle(pen, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dy));
+                    break;
+                case ShapeMode.DRAWSQUARE:
+                    pen = new Pen(_currColor, (float)_currPenSize);
+                    _grs.DrawRectangle(pen, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dx));
+                    break;
+                case ShapeMode.DRAWCIRCLE:
+                    pen = new Pen(_currColor, (float)_currPenSize);
+                    _grs.DrawEllipse(pen, _p1.X, _p1.Y, dx, dx);
+                    break;
+                case ShapeMode.DRAWELLIPSE:
+                    pen = new Pen(_currColor, (float)_currPenSize);
+                    _grs.DrawEllipse(pen, _p1.X, _p1.Y, dx, dy);
+                    break;
+                case ShapeMode.FILLTRIANGLE:
+                    sb = new SolidBrush(_currColor);
+                    Point pT = new Point(_p1.X, _p2.Y);
+                    Point[] points = { _p1, _p2, pT };
+                    _grs.FillPolygon(sb, points);
+                    break;
+                case ShapeMode.FILLSQUARE:
+                    sb = new SolidBrush(_currColor);
+                    _grs.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dx));
+                    break;
+                case ShapeMode.FILLCIRCLE:
+                    sb = new SolidBrush(_currColor);
+                    _grs.FillEllipse(sb, _p1.X, _p1.Y, dx, dx);
+                    break;
+                case ShapeMode.FILLELLIPSE:
+                    sb = new SolidBrush(_currColor);
+                    _grs.FillEllipse(sb, _p1.X, _p1.Y, dx, dy);
+                    break;
+                case ShapeMode.FILLRECTANGLE:
+                    sb = new SolidBrush(_currColor);
+                    _grs.FillRectangle(sb, dx > 0 ? _p1.X : _p2.X, dy > 0 ? _p1.Y : _p2.Y, Math.Abs(dx), Math.Abs(dy));
+                    break;
+                case ShapeMode.TEXT:
+                    sb = new SolidBrush(_currColor);
+                    _grs.DrawString(text, _font, sb, _p1.X, _p1.Y);
+                    break;
+                case ShapeMode.ERASER:
+                    pen = new Pen(this.BackColor, (float)_currPenSize);
+                    _grs.DrawLine(pen, _p1, _p2);
+                    break;
+                default:
+                    MessageBox.Show("Lỗi");
+                    break;
             }
-            this.BackgroundImage = (Bitmap)dsBitmap[vt].Clone();
+            //Thêm vào danh sách Bitmap
+            dsBitmap.Add((Bitmap)_bm.Clone());
+            _currPosition = dsBitmap.Count - 1;
+
+            //Gán cho background
+            this.BackgroundImage = (Bitmap)_bm.Clone();
+        }
+
+        private void MiniPaint_MouseDown(object sender, MouseEventArgs e)
+        {
+            //if (_currPosition < dsBitmap.Count - 1)
+            //{
+            for (int i = _currPosition + 1; i < dsBitmap.Count; i++)
+            {
+                    dsBitmap.RemoveAt(i);
+                    lvShape.Items.RemoveAt(i);
+                }
+            //}
+            _isDown = true;
+            _p1 = new Point(e.Location.X, e.Location.Y);
+        }
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            _currPosition--;
+            if (_currPosition < 0)
+                _currPosition = 0;
+
+            _bm = dsBitmap[_currPosition];
+            _grs = Graphics.FromImage(_bm);
+            this.BackgroundImage = (Bitmap)_bm.Clone();
+            this.Refresh();
         }
 
         private void btnRedo_Click(object sender, EventArgs e)
         {
-            vt++;
-            if (vt > dsBitmap.Count - 1)
-                vt = dsBitmap.Count - 1;
-            this.BackgroundImage = (Bitmap)dsBitmap[vt].Clone();
+            _currPosition++;
+            if (_currPosition > dsBitmap.Count - 1)
+                _currPosition = dsBitmap.Count - 1; 
+
+            _bm = dsBitmap[_currPosition];
+            _grs = Graphics.FromImage(_bm);
+            this.BackgroundImage = (Bitmap)_bm.Clone();
+            this.Refresh();
         }
 
         private void buttonItem3_Click(object sender, EventArgs e)
