@@ -59,7 +59,6 @@
     <Compile Include="frmText.Designer.cs">
       <DependentUpon>frmText.cs</DependentUpon>
     </Compile>
-    <Compile Include="LocationDetail.cs" />
     <Compile Include="MiniPaint.cs">
       <SubType>Form</SubType>
     </Compile>

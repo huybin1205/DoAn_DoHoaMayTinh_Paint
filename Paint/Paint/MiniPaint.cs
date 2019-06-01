@@ -70,12 +70,12 @@ namespace Paint
 
             //Khởi tạo danh sách Bitmap
             dsBitmap = new List<Bitmap>();
-            _currPosition = -1;
+            _currPosition = 0;
         }
 
         private void MiniPaint_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void InitComboBoxSize()
@@ -86,7 +86,7 @@ namespace Paint
             }
             cbSize.SelectedIndex = 0;
         }
-        
+
         private void MiniPaint_Paint(object sender, PaintEventArgs e)
         {
             XuLyPaint(e);
@@ -173,18 +173,6 @@ namespace Paint
             XuLyUndoRedo();
         }
 
-        private void XuLyUndoRedo()
-        {
-            //Hiển thị lên Listview
-            ListViewItem lvi = new ListViewItem(_currShapeMode.ToString());
-            lvi.SubItems.Add(_p1.X.ToString());
-            lvi.SubItems.Add(_p1.Y.ToString());
-            lvi.SubItems.Add(_p2.X.ToString());
-            lvi.SubItems.Add(_p2.Y.ToString());
-            lvShape.Items.Add(lvi);
-        }
-
-
         private void MiniPaint_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isDown)
@@ -233,6 +221,7 @@ namespace Paint
         private void btnNew_Click(object sender, EventArgs e)
         {
             lvShape.Items.Clear();
+            dsBitmap.Clear();
             _bm = new Bitmap(this.Width, this.Height);
             _grs = Graphics.FromImage(_bm);
             this.Refresh();
@@ -241,6 +230,8 @@ namespace Paint
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            lvShape.Items.Clear();
+            dsBitmap.Clear();
             OpenFileDialog ofd = new OpenFileDialog();
 
             //Cài đặt bộ lọc đuôi ảnh
@@ -342,7 +333,7 @@ namespace Paint
 
         private void btnFill_Click(object sender, EventArgs e)
         {
-            if(btnFill.Checked == true)
+            if (btnFill.Checked == true)
                 btnFill.Checked = false;
             else
                 btnFill.Checked = true;
@@ -369,7 +360,7 @@ namespace Paint
                 XuLySelect(pen, sb, _grs, lvShape.SelectedItems[0].Text);
             }
 
-            
+
         }
 
         private void XuLySelect(Pen pen, SolidBrush sb, Graphics _gr, string shapeMode)
@@ -507,24 +498,34 @@ namespace Paint
                     MessageBox.Show("Lỗi");
                     break;
             }
-            //Thêm vào danh sách Bitmap
-            dsBitmap.Add((Bitmap)_bm.Clone());
-            _currPosition = dsBitmap.Count - 1;
-
+           
             //Gán cho background
             this.BackgroundImage = (Bitmap)_bm.Clone();
         }
 
+        private void XuLyUndoRedo()
+        {
+            //Hiển thị lên Listview
+            ListViewItem lvi = new ListViewItem(_currShapeMode.ToString());
+            lvi.SubItems.Add(_p1.X.ToString());
+            lvi.SubItems.Add(_p1.Y.ToString());
+            lvi.SubItems.Add(_p2.X.ToString());
+            lvi.SubItems.Add(_p2.Y.ToString());
+            lvShape.Items.Add(lvi);
+            //Thêm vào danh sách Bitmap
+            dsBitmap.Add((Bitmap)_bm.Clone());
+            _currPosition = dsBitmap.Count - 1;
+        }
+
         private void MiniPaint_MouseDown(object sender, MouseEventArgs e)
         {
-            //if (_currPosition < dsBitmap.Count - 1)
-            //{
-            for (int i = _currPosition + 1; i < dsBitmap.Count; i++)
+            //Nếu đang Redo mà vẽ tiếp thì bắt đầu vẽ từ vị trí Bitmap đó
+            if (_currPosition < dsBitmap.Count - 1)
             {
-                    dsBitmap.RemoveAt(i);
-                    lvShape.Items.RemoveAt(i);
-                }
-            //}
+                dsBitmap.Clear();
+                lvShape.Items.Clear();
+            }
+
             _isDown = true;
             _p1 = new Point(e.Location.X, e.Location.Y);
         }
@@ -545,7 +546,7 @@ namespace Paint
         {
             _currPosition++;
             if (_currPosition > dsBitmap.Count - 1)
-                _currPosition = dsBitmap.Count - 1; 
+                _currPosition = dsBitmap.Count - 1;
 
             _bm = dsBitmap[_currPosition];
             _grs = Graphics.FromImage(_bm);
