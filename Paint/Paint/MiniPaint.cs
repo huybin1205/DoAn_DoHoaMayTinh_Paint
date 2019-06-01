@@ -45,6 +45,7 @@ namespace Paint
         //Undo and Redo
         private List<Bitmap> dsBitmap;
         private int _currPosition;
+        private List<Bitmap> dsT;
 
         public MiniPaint()
         {
@@ -70,6 +71,7 @@ namespace Paint
 
             //Khởi tạo danh sách Bitmap
             dsBitmap = new List<Bitmap>();
+            dsT = new List<Bitmap>();
             _currPosition = 0;
         }
 
@@ -522,8 +524,14 @@ namespace Paint
             //Nếu đang Redo mà vẽ tiếp thì bắt đầu vẽ từ vị trí Bitmap đó
             if (_currPosition < dsBitmap.Count - 1)
             {
-                dsBitmap.Clear();
-                lvShape.Items.Clear();
+                for (int i = dsBitmap.Count -1; i > _currPosition ; i--)
+                {
+                    dsBitmap.Remove(dsBitmap[i]);
+                    lvShape.Items.RemoveAt(i);
+                }
+
+                //dsBitmap.Clear();
+                //lvShape.Items.Clear();
             }
 
             _isDown = true;
@@ -533,7 +541,7 @@ namespace Paint
         private void btnUndo_Click(object sender, EventArgs e)
         {
             _currPosition--;
-            if (_currPosition < 0)
+            if (_currPosition <= 0)
                 _currPosition = 0;
 
             _bm = dsBitmap[_currPosition];
@@ -545,7 +553,7 @@ namespace Paint
         private void btnRedo_Click(object sender, EventArgs e)
         {
             _currPosition++;
-            if (_currPosition > dsBitmap.Count - 1)
+            if (_currPosition >= dsBitmap.Count - 1)
                 _currPosition = dsBitmap.Count - 1;
 
             _bm = dsBitmap[_currPosition];
